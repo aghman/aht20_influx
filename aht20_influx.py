@@ -26,10 +26,15 @@ while True:
     print("\nTemperature: %0.1f C" % sensor.temperature)
     print("Temperature: %0.1f F" % temp_farenheight)
     print("Humidity: %0.1f %%" % sensor.relative_humidity)
-    point = Point("mem")\
-        .tag("host", "host1")\
-        .field("used_percent", 23.43234543)\
+    temp_point = Point("temperature")\
+        .tag("location", "under_house_nw")\
+        .field("celsius", sensor.temperature)\
+        .time(datetime.utcnow(), WritePrecision.NS)
+    humidity_point = Point("humidity")\
+        .tag("location", "under_house_nw")\
+        .field("percentage", sensor.relative_humidity)\
         .time(datetime.utcnow(), WritePrecision.NS)
 
-    write_api.write(bucket, org, point)
+    write_api.write(bucket, org, temp_point)
+    write_api.write(bucket, org, humidity_point)
     time.sleep(2)
