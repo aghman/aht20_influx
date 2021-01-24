@@ -9,6 +9,7 @@ sensor = adafruit_ahtx0.AHTx0(i2c)
 
 while True:
     temp_farenheight = sensor.temperature * (9/5) + 32
-    print("\nTemperature: %0.1f C, %0.1f" % sensor.temperature % temp_farenheight)
+    print("\nTemperature: %0.1f C" % sensor.temperature)
+    print("\nTemperature: %0.1f F" % temp_farenheight)
     print("Humidity: %0.1f %%" % sensor.relative_humidity)
     time.sleep(2)
